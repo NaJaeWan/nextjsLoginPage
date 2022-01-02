@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from '../styles/Home.module.scss';
 import { useState } from 'react';
+import loginHandler from './api/loginHandler';
 
 export default function Home() {
   const [userID, setUserID] = useState('');
@@ -17,6 +18,7 @@ export default function Home() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    loginHandler(userID, userPW);
   };
 
   return (

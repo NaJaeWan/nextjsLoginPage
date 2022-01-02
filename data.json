@@ -1,0 +1,16 @@
+{
+  "account": [
+    {
+      "id": "admin",
+      "password": "1234"
+    },
+    {
+      "id": "admin1",
+      "password": "1234"
+    },
+    {
+      "id": "admin2",
+      "password": "4321"
+    }
+  ]
+}
