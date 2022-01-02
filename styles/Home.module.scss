@@ -6,6 +6,7 @@
   align-items: center;
 }
 .loginForm {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,6 +16,7 @@
   border: 1px solid gray;
   border-radius: 5px;
   box-shadow: 0px 3px 2px rgb(187, 186, 186);
+
   .loginFormInput {
     display: flex;
     flex-direction: column;
@@ -24,4 +26,7 @@
 .pwFiled {
   width: 250px;
   margin-bottom: 10px;
+}
+.loginLogo {
+  margin-bottom: 100px;
 }
