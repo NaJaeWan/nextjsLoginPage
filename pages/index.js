@@ -3,40 +3,22 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from '../styles/Home.module.scss';
-import { useState } from 'react';
 import loginHandler from './api/loginHandler';
 import Image from 'next/image';
 import logo from '../public/logo.png';
+import { useInput } from '../hooks/useInput';
 
 export default function Home() {
-  const [userID, setUserID] = useState('');
-  const [userPW, setUserPW] = useState('');
-  const [useridValidator, setUseridValidator] = useState(false);
-  const [userpwValidator, setUserpwValidator] = useState(false);
-  const regExp = /^[0-9a-zA-Z]{5,16}$/;
-
-  const changeUserID = (e) => {
-    setUserID(e.target.value);
-    if (regExp.test(userID)) {
-      setUseridValidator(false);
-    } else {
-      setUseridValidator(true);
-    }
-  };
-  const changeUserPW = (e) => {
-    setUserPW(e.target.value);
-    if (regExp.test(userPW)) {
-      setUserpwValidator(false);
-    } else {
-      setUserpwValidator(true);
-    }
-  };
+  const regExp = /^[0-9a-zA-Z]{6,16}$/;
+  const userID = useInput('아이디','',regExp);
+  const userPW = useInput('비밀번호','',regExp);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (useridValidator || userpwValidator || userID === '' || userPW === '') {
+    if(!userID.checkValid() || !userPW.checkValid()){
       return;
     }
-    loginHandler(userID, userPW);
+    loginHandler(userID.value,userPW.value);
   };
 
   return (
@@ -69,10 +51,10 @@ export default function Home() {
               className={styles.idFiled}
               label="아이디"
               variant="outlined"
-              onChange={changeUserID}
-              error={useridValidator}
+              onChange={userID.onChange}
+              error={userID.error}
               helperText={
-                useridValidator && '아이디는 6~16자 숫자, 영어만 가능합니다.'
+                userID.error && '아이디는 6~16자 숫자, 영어만 가능합니다.'
               }
             />
             <TextField
@@ -80,10 +62,10 @@ export default function Home() {
               className={styles.pwFiled}
               label="비밀번호"
               variant="outlined"
-              onChange={changeUserPW}
-              error={userpwValidator}
+              onChange={userPW.onChange}
+              error={userPW.error}
               helperText={
-                userpwValidator && '비밀번호는 6~16자 숫자, 영어만 가능합니다.'
+                userPW.error && '비밀번호는 6~16자 숫자, 영어만 가능합니다.'
               }
             />
             <Button
